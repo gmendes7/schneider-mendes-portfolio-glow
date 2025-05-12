@@ -9,7 +9,7 @@ const Hero = ({ openContactModal }: { openContactModal: () => void }) => {
           <h1 className="text-4xl md:text-6xl font-bold">
             <span className="text-foreground">Olá, sou</span>
             <br />
-            <span className="text-gradient">Schneider Mendes</span>
+            <span className="text-gradient">Gabriel Mendes</span>
           </h1>
           <h2 className="text-2xl md:text-3xl text-foreground/80 font-light">
             Desenvolvedor <span className="text-primary">Full Stack</span>
@@ -42,7 +42,7 @@ const Hero = ({ openContactModal }: { openContactModal: () => void }) => {
               <div className="code-block font-mono text-sm text-foreground/80">
                 <div className="mb-2"><span className="text-purple-400">const</span> <span className="text-blue-400">developer</span> = {'{'}</div>
                 <div className="ml-4">
-                  <span className="text-green-400">name</span>: <span className="text-yellow-300">"Schneider Mendes"</span>,
+                  <span className="text-green-400">name</span>: <span className="text-yellow-300">"Gabriel Mendes"</span>,
                 </div>
                 <div className="ml-4">
                   <span className="text-green-400">title</span>: <span className="text-yellow-300">"Full Stack Developer"</span>,
