@@ -44,15 +44,14 @@ const RealProjectCard = ({ title, description, emoji, url }: RealProjectCardProp
           {description}
         </p>
         <div className="flex justify-center mt-auto">
-          <Button 
-            as="a" 
+          <a 
             href={url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-primary hover:bg-primary/80 mt-2"
+            className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded flex items-center justify-center mt-2"
           >
             Visitar Projeto <ExternalLink className="ml-1 h-4 w-4" />
-          </Button>
+          </a>
         </div>
       </CardContent>
     </Card>
