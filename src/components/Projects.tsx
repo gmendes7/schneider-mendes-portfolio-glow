@@ -16,9 +16,17 @@ const Projects = () => {
           url="https://corpo-em-equilibrio-digital.lovable.app"
           imageUrl="https://corpo-em-equilibrio-digital.lovable.app/image/main-logo.png"
         />
-        {[1, 2].map((item) => (
-          <ProjectCard key={item} />
-        ))}
+        <RealProjectCard 
+          title="Trinity Digital Canvas"
+          description="Projeto de desenvolvimento com aspectos de design mais escuros, focado em interfaces modernas."
+          emoji="🌱"
+          url="https://github.com/gmendes7/trinity-digital-canvas"
+          darkTheme={true}
+        />
+        <ProjectCard 
+          emoji="🌿" 
+          description="Mais projetos interessantes estão sendo desenvolvidos com tecnologias verdes e sustentáveis. Fique ligado!"
+        />
       </div>
     </section>
   );
@@ -30,12 +38,15 @@ interface RealProjectCardProps {
   emoji: string;
   url: string;
   imageUrl?: string;
+  darkTheme?: boolean;
 }
 
-const RealProjectCard = ({ title, description, emoji, url, imageUrl }: RealProjectCardProps) => {
+const RealProjectCard = ({ title, description, emoji, url, imageUrl, darkTheme }: RealProjectCardProps) => {
   return (
-    <Card className="bg-card border border-border/30 overflow-hidden glow-effect flex flex-col">
-      <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
+    <Card className={`bg-card border border-border/30 overflow-hidden glow-effect flex flex-col ${darkTheme ? 'bg-gray-900' : ''}`}>
+      <div className={`h-40 flex items-center justify-center ${darkTheme 
+        ? 'bg-gradient-to-br from-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-primary/20 to-accent/10'}`}>
         {imageUrl ? (
           <AspectRatio ratio={16/9} className="h-full w-full">
             <img 
@@ -45,14 +56,16 @@ const RealProjectCard = ({ title, description, emoji, url, imageUrl }: RealProje
             />
           </AspectRatio>
         ) : (
-          <div className="bg-background/20 backdrop-blur-sm p-3 rounded-full">
-            <span className="text-lg">{emoji}</span>
+          <div className={`${darkTheme 
+            ? 'bg-gray-800/80 backdrop-blur-sm' 
+            : 'bg-emerald-600/20 backdrop-blur-sm'} p-3 rounded-full`}>
+            <span className="text-2xl">{emoji}</span>
           </div>
         )}
       </div>
-      <CardContent className="p-6 flex-grow flex flex-col">
+      <CardContent className={`p-6 flex-grow flex flex-col ${darkTheme ? 'text-gray-200' : ''}`}>
         <h3 className="text-xl font-semibold mb-4 text-center">{title}</h3>
-        <p className="text-foreground/60 text-center mb-4 flex-grow">
+        <p className={`text-center mb-4 flex-grow ${darkTheme ? 'text-gray-400' : 'text-foreground/60'}`}>
           {description}
         </p>
         <div className="flex justify-center mt-auto">
@@ -60,7 +73,9 @@ const RealProjectCard = ({ title, description, emoji, url, imageUrl }: RealProje
             href={url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded flex items-center justify-center mt-2"
+            className={`px-4 py-2 rounded flex items-center justify-center mt-2 ${darkTheme 
+              ? 'bg-gray-800 hover:bg-gray-700 text-white' 
+              : 'bg-primary hover:bg-primary/80 text-white'}`}
           >
             Visitar Projeto <ExternalLink className="ml-1 h-4 w-4" />
           </a>
@@ -70,18 +85,23 @@ const RealProjectCard = ({ title, description, emoji, url, imageUrl }: RealProje
   );
 };
 
-const ProjectCard = () => {
+interface ProjectCardProps {
+  emoji?: string;
+  description?: string;
+}
+
+const ProjectCard = ({ emoji = "🌱", description = "Mais projetos interessantes estão sendo desenvolvidos. Fique ligado!" }: ProjectCardProps) => {
   return (
     <Card className="bg-card border border-border/30 overflow-hidden glow-effect">
-      <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
-        <div className="bg-background/20 backdrop-blur-sm p-3 rounded-full">
-          <span className="text-lg">🚀</span>
+      <div className="h-40 bg-gradient-to-br from-emerald-600/20 to-green-400/10 flex items-center justify-center">
+        <div className="bg-emerald-600/20 backdrop-blur-sm p-3 rounded-full">
+          <span className="text-2xl">{emoji}</span>
         </div>
       </div>
       <CardContent className="p-6">
         <h3 className="text-xl font-semibold mb-4 text-center">Projetos em breve...</h3>
         <p className="text-foreground/60 text-center">
-          Mais projetos interessantes estão sendo desenvolvidos. Fique ligado!
+          {description}
         </p>
       </CardContent>
     </Card>
