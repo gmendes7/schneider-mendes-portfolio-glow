@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Projects = () => {
   return (
@@ -14,6 +14,7 @@ const Projects = () => {
           description="Site para clínica de saúde e bem-estar, oferecendo informações sobre serviços de nutrição e fisioterapia."
           emoji="💪"
           url="https://corpo-em-equilibrio-digital.lovable.app"
+          imageUrl="https://corpo-em-equilibrio-digital.lovable.app/image/main-logo.png"
         />
         {[1, 2].map((item) => (
           <ProjectCard key={item} />
@@ -28,15 +29,26 @@ interface RealProjectCardProps {
   description: string;
   emoji: string;
   url: string;
+  imageUrl?: string;
 }
 
-const RealProjectCard = ({ title, description, emoji, url }: RealProjectCardProps) => {
+const RealProjectCard = ({ title, description, emoji, url, imageUrl }: RealProjectCardProps) => {
   return (
     <Card className="bg-card border border-border/30 overflow-hidden glow-effect flex flex-col">
       <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
-        <div className="bg-background/20 backdrop-blur-sm p-3 rounded-full">
-          <span className="text-lg">{emoji}</span>
-        </div>
+        {imageUrl ? (
+          <AspectRatio ratio={16/9} className="h-full w-full">
+            <img 
+              src={imageUrl} 
+              alt={title} 
+              className="object-contain h-full w-full p-4" 
+            />
+          </AspectRatio>
+        ) : (
+          <div className="bg-background/20 backdrop-blur-sm p-3 rounded-full">
+            <span className="text-lg">{emoji}</span>
+          </div>
+        )}
       </div>
       <CardContent className="p-6 flex-grow flex flex-col">
         <h3 className="text-xl font-semibold mb-4 text-center">{title}</h3>
