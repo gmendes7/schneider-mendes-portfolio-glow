@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Triangle, Ghost } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Projects = () => {
@@ -12,16 +12,16 @@ const Projects = () => {
         <RealProjectCard 
           title="Corpo em Equilíbrio Digital"
           description="Site para clínica de saúde e bem-estar, oferecendo informações sobre serviços de nutrição e fisioterapia."
-          emoji="💪"
+          emoji="🌱"
           url="https://corpo-em-equilibrio-digital.lovable.app"
-          imageUrl="https://corpo-em-equilibrio-digital.lovable.app/image/main-logo.png"
         />
         <RealProjectCard 
           title="Trinity Digital Canvas"
           description="Projeto de desenvolvimento com aspectos de design mais escuros, focado em interfaces modernas."
-          emoji="🌱"
-          url="https://github.com/gmendes7/trinity-digital-canvas"
+          emoji="👻"
+          url="https://trinity-digital-canvas.lovable.app"
           darkTheme={true}
+          icon={<Ghost className="w-8 h-8" />}
         />
         <ProjectCard 
           emoji="🌿" 
@@ -39,9 +39,10 @@ interface RealProjectCardProps {
   url: string;
   imageUrl?: string;
   darkTheme?: boolean;
+  icon?: React.ReactNode;
 }
 
-const RealProjectCard = ({ title, description, emoji, url, imageUrl, darkTheme }: RealProjectCardProps) => {
+const RealProjectCard = ({ title, description, emoji, url, imageUrl, darkTheme, icon }: RealProjectCardProps) => {
   return (
     <Card className={`bg-card border border-border/30 overflow-hidden glow-effect flex flex-col ${darkTheme ? 'bg-gray-900' : ''}`}>
       <div className={`h-40 flex items-center justify-center ${darkTheme 
@@ -58,8 +59,8 @@ const RealProjectCard = ({ title, description, emoji, url, imageUrl, darkTheme }
         ) : (
           <div className={`${darkTheme 
             ? 'bg-gray-800/80 backdrop-blur-sm' 
-            : 'bg-emerald-600/20 backdrop-blur-sm'} p-3 rounded-full`}>
-            <span className="text-2xl">{emoji}</span>
+            : 'bg-emerald-600/20 backdrop-blur-sm'} p-3 rounded-full flex items-center justify-center`}>
+            {icon ? icon : <span className="text-2xl">{emoji}</span>}
           </div>
         )}
       </div>
