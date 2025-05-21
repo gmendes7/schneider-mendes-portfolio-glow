@@ -18,14 +18,16 @@ const Projects = () => {
         <RealProjectCard 
           title="Trinity Digital Canvas"
           description="Projeto de desenvolvimento com aspectos de design mais escuros, focado em interfaces modernas."
-          emoji="👻"
           url="https://trinity-digital-canvas.lovable.app"
           darkTheme={true}
-          icon={<Ghost className="w-8 h-8" />}
+          icon={<Triangle className="w-8 h-8 text-white" />}
         />
-        <ProjectCard 
-          emoji="🌿" 
-          description="Mais projetos interessantes estão sendo desenvolvidos com tecnologias verdes e sustentáveis. Fique ligado!"
+        <RealProjectCard 
+          title="Phantom AI Kanban Flow"
+          description="Ferramenta de gerenciamento de projetos com interface moderna e funcionalidades avançadas."
+          url="https://phantom-ai-kanban-flow.lovable.app"
+          darkTheme={true}
+          icon={<Ghost className="w-8 h-8 text-purple-400" />}
         />
       </div>
     </section>
@@ -35,7 +37,7 @@ const Projects = () => {
 interface RealProjectCardProps {
   title: string;
   description: string;
-  emoji: string;
+  emoji?: string;
   url: string;
   imageUrl?: string;
   darkTheme?: boolean;
@@ -81,29 +83,6 @@ const RealProjectCard = ({ title, description, emoji, url, imageUrl, darkTheme, 
             Visitar Projeto <ExternalLink className="ml-1 h-4 w-4" />
           </a>
         </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-interface ProjectCardProps {
-  emoji?: string;
-  description?: string;
-}
-
-const ProjectCard = ({ emoji = "🌱", description = "Mais projetos interessantes estão sendo desenvolvidos. Fique ligado!" }: ProjectCardProps) => {
-  return (
-    <Card className="bg-card border border-border/30 overflow-hidden glow-effect">
-      <div className="h-40 bg-gradient-to-br from-emerald-600/20 to-green-400/10 flex items-center justify-center">
-        <div className="bg-emerald-600/20 backdrop-blur-sm p-3 rounded-full">
-          <span className="text-2xl">{emoji}</span>
-        </div>
-      </div>
-      <CardContent className="p-6">
-        <h3 className="text-xl font-semibold mb-4 text-center">Projetos em breve...</h3>
-        <p className="text-foreground/60 text-center">
-          {description}
-        </p>
       </CardContent>
     </Card>
   );
