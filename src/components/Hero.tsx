@@ -1,63 +1,115 @@
 
 import { Button } from "@/components/ui/button";
+import { Download, ArrowDown } from "lucide-react";
 
 const Hero = ({ openContactModal }: { openContactModal: () => void }) => {
+  const scrollToAbout = () => {
+    const element = document.getElementById("about");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16 section">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-6 md:pr-8">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            <span className="text-foreground">Olá, sou</span>
-            <br />
-            <span className="text-gradient">Gabriel Mendes</span>
-          </h1>
-          <h2 className="text-2xl md:text-3xl text-foreground/80 font-light">
-            Desenvolvedor <span className="text-primary">Full Stack</span>
-          </h2>
-          <p className="text-lg text-foreground/70">
-            Transformando ideias em experiências digitais através de código limpo e design intuitivo.
-          </p>
-          <div className="flex gap-4 pt-4">
+    <section id="home" className="min-h-screen flex items-center pt-16 section relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 right-1/6 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl opacity-50 animate-float" />
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent/5 rounded-full filter blur-3xl opacity-30 animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-emerald-500/5 rounded-full filter blur-3xl opacity-40 animate-float" style={{ animationDelay: "4s" }} />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="space-y-8 animate-fade-in">
+          <div className="space-y-4">
+            <div className="inline-block">
+              <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                👋 Desenvolvedor Full Stack
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="text-foreground">Olá, sou</span>
+              <br />
+              <span className="text-gradient bg-gradient-to-r from-primary via-accent to-emerald-500 bg-clip-text text-transparent">
+                Gabriel Mendes
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-foreground/70 font-light leading-relaxed">
+              Transformando <span className="text-primary font-medium">ideias complexas</span> em 
+              <span className="text-accent font-medium"> soluções elegantes</span> através de código limpo e design intuitivo.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-6">
             <Button 
               onClick={openContactModal}
-              className="bg-primary hover:bg-primary/80 text-white px-8 py-6 rounded-md glow-effect"
               size="lg"
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-6 rounded-xl glow-effect shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
             >
-              Fale comigo
+              Vamos conversar
             </Button>
             <Button
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/10 px-8 py-6 rounded-md"
               size="lg"
+              className="border-2 border-primary/30 text-primary hover:bg-primary/10 px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 hover:border-primary/50"
             >
-              Ver Projetos
+              <Download className="w-5 h-5 mr-2" />
+              Download CV
             </Button>
+          </div>
+
+          <div className="flex items-center gap-6 pt-4 text-sm text-foreground/60">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+              <span>Disponível para projetos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>🌍 Brasil • 🇺🇸 English • 🇩🇪 Deutsch</span>
+            </div>
           </div>
         </div>
         
-        <div className="hidden md:flex justify-center">
+        <div className="hidden lg:flex justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-full blur-3xl opacity-30 animate-float"></div>
-            <div className="relative bg-card rounded-2xl p-8 border border-border/50 glow-effect">
-              <div className="code-block font-mono text-sm text-foreground/80">
-                <div className="mb-2"><span className="text-purple-400">const</span> <span className="text-blue-400">developer</span> = {'{'}</div>
-                <div className="ml-4">
-                  <span className="text-green-400">name</span>: <span className="text-yellow-300">"Gabriel Mendes"</span>,
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-accent/30 to-emerald-500/30 rounded-2xl blur-2xl opacity-50 animate-float"></div>
+            <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-border/50 glow-effect shadow-2xl">
+              <div className="code-block font-mono text-sm text-foreground/90 space-y-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex gap-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="text-foreground/60 text-xs">gabriel-portfolio.ts</span>
                 </div>
-                <div className="ml-4">
-                  <span className="text-green-400">title</span>: <span className="text-yellow-300">"Full Stack Developer"</span>,
-                </div>
-                <div className="ml-4">
-                  <span className="text-green-400">skills</span>: [<span className="text-yellow-300">"React"</span>, <span className="text-yellow-300">"Node.js"</span>, <span className="text-yellow-300">"MongoDB"</span>],
-                </div>
-                <div className="ml-4">
-                  <span className="text-green-400">available</span>: <span className="text-purple-400">true</span>
+                <div><span className="text-purple-400">const</span> <span className="text-blue-400">developer</span> = {'{'}</div>
+                <div className="ml-4 space-y-1">
+                  <div><span className="text-emerald-400">name</span>: <span className="text-yellow-300">"Gabriel Mendes"</span>,</div>
+                  <div><span className="text-emerald-400">age</span>: <span className="text-orange-400">18</span>,</div>
+                  <div><span className="text-emerald-400">role</span>: <span className="text-yellow-300">"Full Stack Developer"</span>,</div>
+                  <div><span className="text-emerald-400">education</span>: <span className="text-yellow-300">"Computer Science"</span>,</div>
+                  <div><span className="text-emerald-400">languages</span>: [<span className="text-yellow-300">"PT"</span>, <span className="text-yellow-300">"EN"</span>, <span className="text-yellow-300">"DE"</span>],</div>
+                  <div><span className="text-emerald-400">passion</span>: <span className="text-yellow-300">"Clean Code & Innovation"</span>,</div>
+                  <div><span className="text-emerald-400">available</span>: <span className="text-purple-400">true</span></div>
                 </div>
                 <div>{'}'};</div>
+                <div className="pt-2"><span className="text-gray-500">// Ready to build amazing things ✨</span></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={scrollToAbout}
+          className="rounded-full border border-primary/20 hover:bg-primary/10 transition-all duration-300"
+        >
+          <ArrowDown className="w-5 h-5 text-primary" />
+        </Button>
       </div>
     </section>
   );

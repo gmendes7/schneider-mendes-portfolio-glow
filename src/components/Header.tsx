@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = ({ openContactModal }: { openContactModal: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -25,58 +26,66 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
     setMobileMenuOpen(false);
   };
 
+  const navigationItems = [
+    { label: "Home", id: "home" },
+    { label: "Sobre", id: "about" },
+    { label: "Skills", id: "skills" },
+    { label: "Projetos", id: "projects" },
+    { label: "Contato", id: "contact" }
+  ];
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-lg" : "bg-transparent"
+        scrolled ? "bg-background/80 backdrop-blur-md shadow-lg border-b border-border/30" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-gradient">&lt;SM/&gt;</span>
+            <button 
+              onClick={() => scrollToSection("home")}
+              className="text-2xl font-bold text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            >
+              &lt;GM/&gt;
+            </button>
           </div>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            <button 
-              onClick={() => scrollToSection("home")} 
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection("tech")} 
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Tecnologias
-            </button>
-            <button 
-              onClick={() => scrollToSection("projects")} 
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Projetos
-            </button>
+          <nav className="hidden md:flex items-center space-x-8">
+            {navigationItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium relative group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              </button>
+            ))}
           </nav>
           
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Button 
               onClick={openContactModal} 
-              className="bg-primary hover:bg-primary/80 text-white"
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-xl transition-all duration-300 hover:scale-105 glow-effect"
             >
               Fale comigo
             </Button>
           </div>
           
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="hover:bg-primary/10 transition-colors duration-300"
               aria-label="Menu"
             >
-              {mobileMenuOpen ? <X /> : <Menu />}
+              {mobileMenuOpen ? <X className="text-primary" /> : <Menu className="text-primary" />}
             </Button>
           </div>
         </div>
@@ -84,32 +93,23 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
       
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md">
-          <div className="px-4 py-2 space-y-1">
-            <button 
-              onClick={() => scrollToSection("home")} 
-              className="block w-full text-left py-2 text-foreground hover:text-primary"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection("tech")} 
-              className="block w-full text-left py-2 text-foreground hover:text-primary"
-            >
-              Tecnologias
-            </button>
-            <button 
-              onClick={() => scrollToSection("projects")} 
-              className="block w-full text-left py-2 text-foreground hover:text-primary"
-            >
-              Projetos
-            </button>
+        <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border/30 animate-fade-in">
+          <div className="px-4 py-6 space-y-4">
+            {navigationItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="block w-full text-left py-3 text-foreground hover:text-primary transition-colors duration-300 font-medium"
+              >
+                {item.label}
+              </button>
+            ))}
             <Button 
               onClick={() => {
                 openContactModal();
                 setMobileMenuOpen(false);
               }} 
-              className="w-full mt-2 bg-primary hover:bg-primary/80 text-white"
+              className="w-full mt-4 bg-primary hover:bg-primary/90 text-white py-3 rounded-xl transition-all duration-300"
             >
               Fale comigo
             </Button>
