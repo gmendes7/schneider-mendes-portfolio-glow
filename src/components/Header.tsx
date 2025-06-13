@@ -37,7 +37,7 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-lg border-b border-border/30" : "bg-transparent"
+        scrolled ? "bg-background/90 backdrop-blur-md shadow-lg border-b border-ferrari/20" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +45,7 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
           <div className="flex items-center">
             <button 
               onClick={() => scrollToSection("home")}
-              className="text-2xl font-bold text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+              className="text-2xl font-bold font-orbitron racing-gradient hover:scale-105 transition-transform duration-300"
             >
               &lt;GM/&gt;
             </button>
@@ -57,10 +57,10 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium relative group"
+                className="text-foreground/80 hover:text-ferrari transition-all duration-300 font-medium relative group font-inter"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ferrari transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
           </nav>
@@ -69,7 +69,7 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
             <ThemeToggle />
             <Button 
               onClick={openContactModal} 
-              className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-xl transition-all duration-300 hover:scale-105 glow-effect"
+              className="bg-ferrari hover:bg-ferrari-dark text-white px-6 py-2 rounded-xl transition-all duration-300 hover:scale-105 racing-glow font-orbitron"
             >
               Fale comigo
             </Button>
@@ -82,10 +82,10 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
               variant="ghost" 
               size="icon" 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="hover:bg-primary/10 transition-colors duration-300"
+              className="hover:bg-ferrari/10 transition-colors duration-300"
               aria-label="Menu"
             >
-              {mobileMenuOpen ? <X className="text-primary" /> : <Menu className="text-primary" />}
+              {mobileMenuOpen ? <X className="text-ferrari" /> : <Menu className="text-ferrari" />}
             </Button>
           </div>
         </div>
@@ -93,13 +93,13 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
       
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border/30 animate-fade-in">
+        <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-ferrari/20 animate-fade-in">
           <div className="px-4 py-6 space-y-4">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-3 text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                className="block w-full text-left py-3 text-foreground hover:text-ferrari transition-colors duration-300 font-medium font-inter"
               >
                 {item.label}
               </button>
@@ -109,7 +109,7 @@ const Header = ({ openContactModal }: { openContactModal: () => void }) => {
                 openContactModal();
                 setMobileMenuOpen(false);
               }} 
-              className="w-full mt-4 bg-primary hover:bg-primary/90 text-white py-3 rounded-xl transition-all duration-300"
+              className="w-full mt-4 bg-ferrari hover:bg-ferrari-dark text-white py-3 rounded-xl transition-all duration-300 font-orbitron"
             >
               Fale comigo
             </Button>

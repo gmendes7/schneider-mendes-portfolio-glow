@@ -54,17 +54,63 @@ const Skills = () => {
     }
   ];
 
+  const SkillSpeedometer = ({ skill, index }: { skill: any, index: number }) => {
+    const rotation = (skill.level / 100) * 180 - 90; // -90 to 90 degrees
+    
+    return (
+      <div className="relative w-24 h-24 mx-auto mb-4">
+        {/* Speedometer background */}
+        <div className="w-full h-full rounded-full speedometer-bg relative overflow-hidden">
+          {/* RPM marks */}
+          <div className="absolute inset-2 rounded-full border border-ferrari/30">
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((mark) => (
+              <div
+                key={mark}
+                className="absolute w-0.5 h-2 bg-foreground/40"
+                style={{
+                  top: '2px',
+                  left: '50%',
+                  transformOrigin: '50% 44px',
+                  transform: `translateX(-50%) rotate(${mark * 22.5 - 90}deg)`
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Needle */}
+          <div
+            className="absolute w-0.5 h-8 bg-ferrari origin-bottom left-1/2 bottom-1/2 transition-transform duration-1000 ease-out"
+            style={{
+              transform: `translateX(-50%) rotate(${rotation}deg)`,
+              animationDelay: `${index * 0.1}s`
+            }}
+          />
+          
+          {/* Center dot */}
+          <div className="absolute w-2 h-2 bg-ferrari rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+        </div>
+        
+        {/* Digital display */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2">
+          <div className="bg-black/80 px-2 py-1 rounded text-ferrari text-xs font-orbitron font-bold">
+            {skill.level}%
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section id="skills" className="section">
       <div className="text-center mb-16 animate-fade-in">
-        <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20 mb-4 inline-block">
-          🛠️ Habilidades
+        <span className="text-sm font-medium text-ferrari bg-ferrari/10 px-3 py-1 rounded-full border border-ferrari/20 mb-4 inline-block font-orbitron">
+          🏎️ Habilidades
         </span>
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-          Tecnologias & <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Expertises</span>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground font-orbitron">
+          Tecnologias & <span className="racing-gradient">Performance</span>
         </h2>
-        <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-          Minhas principais ferramentas para criar soluções digitais impactantes e escaláveis
+        <p className="text-lg text-foreground/70 max-w-2xl mx-auto font-inter">
+          Minhas principais ferramentas para criar soluções digitais velozes e escaláveis
         </p>
       </div>
 
@@ -72,35 +118,53 @@ const Skills = () => {
         {skillCategories.map((category, categoryIndex) => (
           <Card 
             key={category.title} 
-            className="bg-card/50 border border-border/30 hover:border-primary/20 transition-all duration-300 glow-effect group animate-fade-in" 
+            className="bg-card/50 border border-ferrari/20 hover:border-ferrari/40 transition-all duration-300 racing-glow group animate-fade-in" 
             style={{ animationDelay: `${categoryIndex * 0.1}s` }}
           >
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{category.icon}</span>
-                <h3 className="text-xl font-semibold text-foreground">{category.title}</h3>
+                <h3 className="text-xl font-semibold text-foreground font-orbitron">{category.title}</h3>
+                <div className="ml-auto">
+                  <span className="text-xs font-bold text-gold bg-gold/10 px-2 py-1 rounded font-orbitron">
+                    🏁 SKILLS
+                  </span>
+                </div>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {category.skills.map((skill, skillIndex) => (
                   <div 
                     key={skill.name} 
                     className="group/skill"
                     style={{ animationDelay: `${(categoryIndex * 0.1) + (skillIndex * 0.05)}s` }}
                   >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-medium text-foreground text-sm">{skill.name}</span>
-                      <Badge variant="outline" className="text-xs border-primary/30 text-primary">
-                        {skill.level}%
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="font-medium text-foreground text-sm font-inter">{skill.name}</span>
+                      <Badge variant="outline" className="text-xs border-ferrari/30 text-ferrari font-orbitron">
+                        {skill.level} RPM
                       </Badge>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                    
+                    {/* Racing-style progress bar */}
+                    <div className="relative">
+                      <div className="w-full bg-muted/50 rounded-full h-3 overflow-hidden border border-ferrari/20">
+                        <div 
+                          className={`h-full ${skill.color} rounded-full transition-all duration-1000 ease-out opacity-80 group-hover/skill:opacity-100 relative`}
+                          style={{ 
+                            width: `${skill.level}%`,
+                            animationDelay: `${(categoryIndex * 0.2) + (skillIndex * 0.1)}s`
+                          }}
+                        >
+                          {/* Racing stripes effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                        </div>
+                      </div>
+                      
+                      {/* Speed indicator */}
                       <div 
-                        className={`h-full ${skill.color} rounded-full transition-all duration-1000 ease-out opacity-80 group-hover/skill:opacity-100`}
-                        style={{ 
-                          width: `${skill.level}%`,
-                          animationDelay: `${(categoryIndex * 0.2) + (skillIndex * 0.1)}s`
-                        }}
+                        className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 bg-ferrari rounded-full transition-all duration-1000"
+                        style={{ left: `${skill.level}%` }}
                       />
                     </div>
                   </div>
@@ -112,9 +176,9 @@ const Skills = () => {
       </div>
 
       <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
-        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-accent/10 px-6 py-3 rounded-full border border-primary/20">
-          <span className="text-sm font-medium text-foreground">
-            🚀 Sempre aprendendo novas tecnologias e aprimorando minhas habilidades
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-ferrari/10 to-gold/10 px-6 py-3 rounded-full border border-ferrari/20">
+          <span className="text-sm font-medium text-foreground font-orbitron">
+            🚀 Sempre aprendendo novas tecnologias e aprimorando a performance
           </span>
         </div>
       </div>
